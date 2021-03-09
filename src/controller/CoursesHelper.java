@@ -52,16 +52,29 @@ public class CoursesHelper {
 	* Method that deletes the first Courses object from database.
 	* @param toDelete: Required Courses object.
 	*/
-		public void deleteItem(Courses toDelete) {
-			EntityManager em = emfactory.createEntityManager();
-			em.getTransaction().begin();
-			TypedQuery<Courses> typedQuery = em.createQuery("select ci from Courses ci where ci.course_id = :selectedId", Courses.class);
-			typedQuery.setParameter("selectedId", toDelete.getId());
-			typedQuery.setMaxResults(1);
-			Courses result = typedQuery.getSingleResult();
-			em.remove(result);
-			em.getTransaction().commit();
-			em.close();
-		}
+	public void deleteItem(Courses toDelete) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Courses> typedQuery = em.createQuery("select ci from Courses ci where ci.id = :selectedId", Courses.class);
+		typedQuery.setParameter("selectedId", toDelete.getId());
+		typedQuery.setMaxResults(1);
+		Courses result = typedQuery.getSingleResult();
+		em.remove(result);
+		em.getTransaction().commit();
+		em.close();
+	}
+		
+	/**
+	 * Method that searches for database object via ID instance.
+	 * @param idToEdit: Required Courses object.
+	 * @return: Courses object.
+	 */
+	public Courses searchForItemById(int idToEdit) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		Courses found = em.find(Courses.class, idToEdit);
+		em.close();
+		return found;
+	}
 
 }

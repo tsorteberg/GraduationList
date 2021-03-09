@@ -6,6 +6,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Courses;
+/**
+ * @author Tom Sorteberg - tsorteberg
+ * @autor Levi Olson - lolson17
+ * CIS175 - Spring 2021
+ * Mar 4, 2021
+ */
 
 /**
  * Servlet implementation class NavigationServlet
@@ -20,14 +27,12 @@ public class NavigationServlet extends HttpServlet {
      */
     public NavigationServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -35,8 +40,36 @@ public class NavigationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		// Local variable declaration an initialization.
+		String act = request.getParameter("doThisToItem");
+		String path = "/ViewAllCoursesServlet";
+				
+		// Local object declaration and instantiation.
+		CoursesHelper dao = new CoursesHelper();
+				
+		// Selection logic to determine selected action with exception handling.
+		// If delete action is selected, then call delete method from context object.
+		if (act.equals("delete")) {
+			try 
+			{
+					Integer tempId = Integer.parseInt(request.getParameter("id"));
+					Courses itemToDelete = dao.searchForItemById(tempId);
+					dao.deleteItem(itemToDelete);
+			}
+			catch (NumberFormatException e) 
+			{
+				System.out.println("An item must be selected for deletion.");
+			}
+		}
+		// If add action is selected, then redirect to index.html.
+		else if (act.equals("add")) {
+			path = "/AddCourseServlet";
+		}
+				
+		// Method call to redirect to index.html using request dispatcher.
+		getServletContext().getRequestDispatcher(path).forward(request, response);
+		
 	}
 
 }
