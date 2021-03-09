@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /**
  * @author Tom Sorteberg - tsorteberg
- * @autor Levi Olson - lolson17
+ * @author Levi Olson - lolson17
  * CIS175 - Spring 2021
  * Mar 4, 2021
  */

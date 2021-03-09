@@ -18,7 +18,7 @@
 <body>
 	<h1>Graduation List</h1>
 	<h2>All Courses:</h2>
-	<form method="post" action="navigationServlet">
+	<form method="post" action="NavigationServlet">
 		<table>
 			<tr>
 				<th></th>
