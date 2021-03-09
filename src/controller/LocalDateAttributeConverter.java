@@ -1,19 +1,34 @@
 package controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+
 /**
  * @author Tom Sorteberg - tsorteberg
  * @autor Levi Olson - lolson17
  * CIS175 - Spring 2021
  * Mar 4, 2021
  */
-//Mirror LocalDateAttributeConverter.java from 'JPA Joins and Attribute Converters.pdf'.
-public class LocalDateAttributeConverter {
+//Set converter annotation.
+@Converter(autoApply = true)
+public class LocalDateAttributeConverter implements AttributeConverter<LocalDate, Date> {
 
 	/**
-	 *
+	 * Method that converts LocalDate object to Date object.
 	 */
-	public LocalDateAttributeConverter() {
-		// TODO Auto-generated constructor stub
+	@Override
+	public Date convertToDatabaseColumn(LocalDate attribute) {
+		return (attribute == null ? null: Date.valueOf(attribute));
+	}
+
+	/**
+	 * Method that converts Date object to LocalDate object.
+	 */
+	@Override
+	public LocalDate convertToEntityAttribute(Date dbData) {
+		return (dbData == null ? null: dbData.toLocalDate());
 	}
 
 }
