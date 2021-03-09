@@ -8,25 +8,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Courses;
-import model.Instructors;
 /**
  * @author Tom Sorteberg - tsorteberg
  * @author Levi Olson - lolson17
  * CIS175 - Spring 2021
  * Mar 9, 2021
  */
+import model.Instructors;
 
 /**
- * Servlet implementation class CreateNewCourseServlet
+ * Servlet implementation class EditCourseServlet
  */
-@WebServlet("/CreateNewCourseServlet")
-public class CreateNewCourseServlet extends HttpServlet {
+@WebServlet("/EditCourseServlet")
+public class EditCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateNewCourseServlet() {
+    public EditCourseServlet() {
         super();
     }
 
@@ -34,10 +34,17 @@ public class CreateNewCourseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Local variable declaration and initialization.		
 		LocalDate ld;
-				
+						
 		// Get parameters from jsp page.
 		String courseName = request.getParameter("courseName");
 		String month = request.getParameter("month");
@@ -46,7 +53,10 @@ public class CreateNewCourseServlet extends HttpServlet {
 		String credits = request.getParameter("credits");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-				
+		
+		Integer tempId = Integer.parseInt(request.getParameter("id"));
+		Integer tempinstructorId = Integer.parseInt(request.getParameter("instructorid"));
+						
 		// Try catch block for date format input validation.
 		try 
 		{
@@ -58,20 +68,28 @@ public class CreateNewCourseServlet extends HttpServlet {
 			ld = LocalDate.now();
 		}
 				
-		// Instantiate Courses object.
-		Instructors instructor = new Instructors(firstName, lastName);
-		Courses course = new Courses(courseName, ld, credits, instructor );
-		CoursesHelper ch = new CoursesHelper();
-		ch.insertCourse(course);
+		// Local object declaration and instantiation.
+		CoursesHelper dao = new CoursesHelper();
+		InstructorsHelper ins = new InstructorsHelper();
+		Courses courseToUpdate = dao.searchForCourseById(tempId);
+		Instructors instructorToUpdate = ins.searchForCourseById(tempinstructorId);
+		//Instructors instructor = new Instructors(firstName, lastName);
 				
-		// Forward http request/response to jsp page.
+		// Set Courses object parameters.
+		courseToUpdate.setCourseName(courseName);
+		courseToUpdate.setStartDate(ld);
+		courseToUpdate.setCredits(credits);
+		
+		// Set Instructors object parameters.
+		instructorToUpdate.setFirstName(firstName);
+		instructorToUpdate.setLastName(lastName);
+				
+		// Method call to update ListItem object to database using ListItemHelper context object.
+		dao.updateItem(courseToUpdate);
+		ins.updateItem(instructorToUpdate);
+				
+		// Method call to redirect to viewAllItemsServlet using request dispatcher.
 		getServletContext().getRequestDispatcher("/ViewAllCoursesServlet").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 }

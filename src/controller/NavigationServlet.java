@@ -14,6 +14,7 @@ import model.Courses;
  * Mar 4, 2021
  */
 
+
 /**
  * Servlet implementation class NavigationServlet
  */
@@ -66,13 +67,25 @@ public class NavigationServlet extends HttpServlet {
 		else if (act.equals("Add:")) {
 			path = "/AddCourseServlet";
 		}
+		// If edit action is selected, then call edit method from context object.
+		else if (act.equals("Edit:")) {
+			try 
+			{
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				Courses courseToEdit = dao.searchForCourseById(tempId);
+				request.setAttribute("courseToEdit", courseToEdit);
+				path = "/edit-course.jsp";
+			}
+			catch (NumberFormatException e) 
+			{
+				System.out.println("An item must be selected for editing.");
+			}
+		}
 		else if (act.equals("Cancel:")) {
 			path = "/index.html";
 		}
 				
 		// Method call to redirect to index.html using request dispatcher.
 		getServletContext().getRequestDispatcher(path).forward(request, response);
-		
 	}
-
 }

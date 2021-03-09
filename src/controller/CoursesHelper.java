@@ -76,5 +76,16 @@ public class CoursesHelper {
 		em.close();
 		return found;
 	}
-
+	
+	/**
+	 * Method that updates database objects.
+	 * @param toEdit: Required Courses object.
+	 */
+	public void updateItem(Courses toEdit) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(toEdit);
+		em.getTransaction().commit();
+		em.close();
+	}
 }
