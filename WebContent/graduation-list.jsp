@@ -1,4 +1,4 @@
-<!-- Mirror new-list.jsp from 'JPA Joins and Attribute Converters.pdf' -->
+<!-- Mirror item-list.jsp from 'ShoppingList Online with JPA Servlets JSP 2020.pdf -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
