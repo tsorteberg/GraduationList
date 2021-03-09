@@ -38,8 +38,9 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<input type="submit" value="delete" name="doThisToItem">
-		<input type="submit" value="add" name="doThisToItem">
+		<input type="submit" value="Delete:" name="doThisToItem">
+		<input type="submit" value="Add:" name="doThisToItem">
+		<input type="submit" value="Cancel:" name="doThisToItem">
 	</form>
 </body>
 </html>

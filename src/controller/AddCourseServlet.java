@@ -27,14 +27,24 @@ public class AddCourseServlet extends HttpServlet {
      */
     public AddCourseServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Local variable declaration and initialization.
+		CoursesHelper dao = new CoursesHelper();
+		request.setAttribute("allItems", dao.showAllItems());
+				
+		// Selection logic to determine if List<ListDetails> object is empty.
+		if(dao.showAllItems().isEmpty())
+		{
+			request.setAttribute("allItems", " ");
+		}
+				
+		// Forward http request/response to jsp page.
+		getServletContext().getRequestDispatcher("/new-course.jsp").forward(request, response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -42,7 +52,6 @@ public class AddCourseServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

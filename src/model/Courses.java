@@ -38,7 +38,7 @@ public class Courses {
 	
 	// credits instance.
 	@Column(name="CREDITS")
-	private int credits;
+	private String credits;
 	
 	// instructors instance.
 	@OneToOne (cascade={CascadeType.PERSIST,CascadeType.REMOVE})
@@ -57,10 +57,10 @@ public class Courses {
 	 * @param id: Required integer.
 	 * @param courseName: Required string.
 	 * @param startDate: Required LocalDate.
-	 * @param credits: Required integer.
+	 * @param credits: Required String.
 	 * @param instructor: Required Instructors object.
 	 */
-	public Courses(int id, String courseName, LocalDate startDate, int credits, Instructors instructor) {
+	public Courses(int id, String courseName, LocalDate startDate, String credits, Instructors instructor) {
 		super();
 		this.id = id;
 		this.courseName = courseName;
@@ -76,7 +76,7 @@ public class Courses {
 	 * @param credits: Required integer.
 	 * @param instructor: Required Instructors object.
 	 */
-	public Courses(String courseName, LocalDate startDate, int credits, Instructors instructor) {
+	public Courses(String courseName, LocalDate startDate, String credits, Instructors instructor) {
 		super();
 		this.courseName = courseName;
 		this.startDate = startDate;
@@ -110,9 +110,9 @@ public class Courses {
 	
 	/**
 	 * Get method for credits instance.
-	 * @return: integer.
+	 * @return: String.
 	 */
-	public int getCredits() {
+	public String getCredits() {
 		return credits;
 	}
 	
@@ -152,7 +152,7 @@ public class Courses {
 	 * Set method for credits instance.
 	 * @param id: Required integer.
 	 */
-	public void setCredits(int credits) {
+	public void setCredits(String credits) {
 		this.credits = credits;
 	}
 	

@@ -27,9 +27,9 @@ public class CoursesHelper {
 		
 	/**
 	* Method that accepts a course to add.
-	* @param courses: Required listItem object type.
+	* @param courses: Required Courses object type.
 	*/
-	public void insertItem(Courses courses) {
+	public void insertCourse(Courses courses) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(courses);
@@ -69,7 +69,7 @@ public class CoursesHelper {
 	 * @param idToEdit: Required Courses object.
 	 * @return: Courses object.
 	 */
-	public Courses searchForItemById(int idToEdit) {
+	public Courses searchForCourseById(int idToEdit) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		Courses found = em.find(Courses.class, idToEdit);
