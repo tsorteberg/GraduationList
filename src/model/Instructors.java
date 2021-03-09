@@ -53,6 +53,17 @@ public class Instructors {
 	}
 	
 	/**
+	 * Overloaded constructor.
+	 * @param firstName: Required string.
+	 * @param lastName: Required string.
+	 */
+	public Instructors(String firstName, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	/**
 	 * Get method for id instance.
 	 * @return: integer.
 	 */

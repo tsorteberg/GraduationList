@@ -50,11 +50,11 @@ public class NavigationServlet extends HttpServlet {
 				
 		// Selection logic to determine selected action with exception handling.
 		// If delete action is selected, then call delete method from context object.
-		if (act.equals("delete")) {
+		if (act.equals("Delete:")) {
 			try 
 			{
 					Integer tempId = Integer.parseInt(request.getParameter("id"));
-					Courses itemToDelete = dao.searchForItemById(tempId);
+					Courses itemToDelete = dao.searchForCourseById(tempId);
 					dao.deleteItem(itemToDelete);
 			}
 			catch (NumberFormatException e) 
@@ -63,8 +63,11 @@ public class NavigationServlet extends HttpServlet {
 			}
 		}
 		// If add action is selected, then redirect to index.html.
-		else if (act.equals("add")) {
+		else if (act.equals("Add:")) {
 			path = "/AddCourseServlet";
+		}
+		else if (act.equals("Cancel:")) {
+			path = "/index.html";
 		}
 				
 		// Method call to redirect to index.html using request dispatcher.
