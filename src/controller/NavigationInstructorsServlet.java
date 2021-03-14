@@ -6,8 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Courses;
-import model.Instructors;
 /**
  * @author Tom Sorteberg - tsorteberg
  * @autor Levi Olson - lolson17
@@ -46,9 +44,6 @@ public class NavigationInstructorsServlet extends HttpServlet {
 		// Local variable declaration an initialization.
 		String act = request.getParameter("doThisToItem");
 		String path;
-				
-		// Local object declaration and instantiation.
-		InstructorsHelper dao = new InstructorsHelper();
 				
 		if (act.equals("Add:")) {
 			path = "/AddInstructorServlet";
