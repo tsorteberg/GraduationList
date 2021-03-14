@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Courses;
+import model.Instructors;
 /**
  * @author Tom Sorteberg - tsorteberg
  * @autor Levi Olson - lolson17
@@ -19,14 +20,14 @@ import model.Courses;
  * Servlet implementation class NavigationServlet
  */
 //Mirror NavigationServlet.java from 'ShoppingList Online with JPA Servlets JSP 2020.pdf'
-@WebServlet("/NavigationServlet")
-public class NavigationServlet extends HttpServlet {
+@WebServlet("/NavigationInstructorsServlet")
+public class NavigationInstructorsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NavigationServlet() {
+    public NavigationInstructorsServlet() {
         super();
     }
 
@@ -44,44 +45,15 @@ public class NavigationServlet extends HttpServlet {
 		
 		// Local variable declaration an initialization.
 		String act = request.getParameter("doThisToItem");
-		String path = "/ViewAllCoursesServlet";
+		String path;
 				
 		// Local object declaration and instantiation.
-		CoursesHelper dao = new CoursesHelper();
+		InstructorsHelper dao = new InstructorsHelper();
 				
-		// Selection logic to determine selected action with exception handling.
-		// If delete action is selected, then call delete method from context object.
-		if (act.equals("Delete:")) {
-			try 
-			{
-					Integer tempId = Integer.parseInt(request.getParameter("id"));
-					Courses itemToDelete = dao.searchForCourseById(tempId);
-					dao.deleteItem(itemToDelete);
-			}
-			catch (NumberFormatException e) 
-			{
-				System.out.println("An item must be selected for deletion.");
-			}
+		if (act.equals("Add:")) {
+			path = "/AddInstructorServlet";
 		}
-		// If add action is selected, then redirect to index.html.
-		else if (act.equals("Add:")) {
-			path = "/AddCourseServlet";
-		}
-		// If edit action is selected, then call edit method from context object.
-		else if (act.equals("Edit:")) {
-			try 
-			{
-				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Courses courseToEdit = dao.searchForCourseById(tempId);
-				request.setAttribute("courseToEdit", courseToEdit);
-				path = "/edit-course.jsp";
-			}
-			catch (NumberFormatException e) 
-			{
-				System.out.println("An item must be selected for editing.");
-			}
-		}
-		else if (act.equals("Cancel:")) {
+		else {
 			path = "/index.html";
 		}
 				

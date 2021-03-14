@@ -72,7 +72,7 @@ public class EditCourseServlet extends HttpServlet {
 		CoursesHelper dao = new CoursesHelper();
 		InstructorsHelper ins = new InstructorsHelper();
 		Courses courseToUpdate = dao.searchForCourseById(tempId);
-		Instructors instructorToUpdate = ins.searchForCourseById(tempinstructorId);
+		Instructors instructorToUpdate = ins.searchForInstructorById(tempinstructorId);
 		//Instructors instructor = new Instructors(firstName, lastName);
 				
 		// Set Courses object parameters.

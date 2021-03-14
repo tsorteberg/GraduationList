@@ -1,31 +1,32 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Courses;
+import model.Instructors;
 /**
  * @author Tom Sorteberg - tsorteberg
  * @author Levi Olson - lolson17
  * CIS175 - Spring 2021
- * Mar 4, 2021
+ * Mar 9, 2021
  */
 
 /**
- * Servlet implementation class ViewAllCoursesServlet
+ * Servlet implementation class CreateNewCourseServlet
  */
-// Mirror ViewAllItemsServlet.java from 'ShoppingList Online with JPA Servlets JSP 2020.pdf'
-// Uses index.jsp as home page.
-@WebServlet("/ViewAllCoursesServlet")
-public class ViewAllCoursesServlet extends HttpServlet {
+@WebServlet("/CreateNewInstructorServlet")
+public class CreateNewInstructorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllCoursesServlet() {
+    public CreateNewInstructorServlet() {
         super();
     }
 
@@ -33,23 +34,18 @@ public class ViewAllCoursesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Local variable declaration and initialization.
-		String path = "/course-list.jsp";
 				
-		// Local object declaration and instantiation.
-		CoursesHelper dao = new CoursesHelper();
+		// Get parameters from jsp page.
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
 				
-		// Method call to set request parameter as a list generated from a context object.
-		request.setAttribute("allItems", dao.showAllItems());
+		// Instantiate Courses object.
+		Instructors instructor = new Instructors(firstName, lastName);
+		InstructorsHelper ih = new InstructorsHelper();
+		ih.insertInstructor(instructor);
 				
-		// Selection logic to provide exception handling.
-		// If database table is empty, redirect to page to add new items.
-		if (dao.showAllItems().isEmpty()) {
-			path="/index.html";
-		}
-				
-		// Method call to redirect to index.html using request dispatcher.
-		getServletContext().getRequestDispatcher(path).forward(request, response);
+		// Forward http request/response to jsp page.
+		getServletContext().getRequestDispatcher("/ViewAllInstructorsServlet").forward(request, response);
 	}
 
 	/**
@@ -58,5 +54,4 @@ public class ViewAllCoursesServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
