@@ -18,14 +18,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 // Mirror ViewAllItemsServlet.java from 'ShoppingList Online with JPA Servlets JSP 2020.pdf'
 // Uses index.jsp as home page.
-@WebServlet("/ViewAllCoursesServlet")
-public class ViewAllCoursesServlet extends HttpServlet {
+@WebServlet("/ViewAllInstructorsServlet")
+public class ViewAllInstructorsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllCoursesServlet() {
+    public ViewAllInstructorsServlet() {
         super();
     }
 
@@ -34,10 +34,10 @@ public class ViewAllCoursesServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Local variable declaration and initialization.
-		String path = "/course-list.jsp";
+		String path = "/instructor-list.jsp";
 				
 		// Local object declaration and instantiation.
-		CoursesHelper dao = new CoursesHelper();
+		InstructorsHelper dao = new InstructorsHelper();
 				
 		// Method call to set request parameter as a list generated from a context object.
 		request.setAttribute("allItems", dao.showAllItems());
