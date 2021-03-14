@@ -81,7 +81,7 @@ public class NavigationServlet extends HttpServlet {
 				System.out.println("An item must be selected for editing.");
 			}
 		}
-		else if (act.equals("Cancel:")) {
+		else if (act.equals("Homepage:")) {
 			path = "/index.html";
 		}
 				
