@@ -13,7 +13,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>New Course:</title>
+		<title>New Instructor:</title>
 	</head>
 	
 	<body>

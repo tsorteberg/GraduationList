@@ -8,24 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /**
  * @author Tom Sorteberg - tsorteberg
- * @author Levi Olson - lolson17
+ * @autor Levi Olson - lolson17
  * CIS175 - Spring 2021
  * Mar 4, 2021
  */
 
 /**
- * Servlet implementation class ViewAllCoursesServlet
+ * Servlet implementation class AddCourseServlet
  */
-// Mirror ViewAllItemsServlet.java from 'ShoppingList Online with JPA Servlets JSP 2020.pdf'
-// Uses index.jsp as home page.
-@WebServlet("/ViewAllCoursesServlet")
-public class ViewAllCoursesServlet extends HttpServlet {
+// Mirror AddItemsForListServlet.java from 'JPA Joins and Attribute Converters.pdf'.
+// Uses new-course.jsp.
+@WebServlet("/AddInstructorServlet")
+public class AddInstructorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllCoursesServlet() {
+    public AddInstructorServlet() {
         super();
     }
 
@@ -34,22 +34,18 @@ public class ViewAllCoursesServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Local variable declaration and initialization.
-		String path = "/course-list.jsp";
-				
-		// Local object declaration and instantiation.
-		CoursesHelper dao = new CoursesHelper();
-				
-		// Method call to set request parameter as a list generated from a context object.
+		InstructorsHelper dao = new InstructorsHelper();
 		request.setAttribute("allItems", dao.showAllItems());
 				
-		// Selection logic to provide exception handling.
-		// If database table is empty, redirect to page to add new items.
-		if (dao.showAllItems().isEmpty()) {
-			path="/index.html";
+		// Selection logic to determine if List<ListDetails> object is empty.
+		if(dao.showAllItems().isEmpty())
+		{
+			request.setAttribute("allItems", " ");
 		}
 				
-		// Method call to redirect to index.html using request dispatcher.
-		getServletContext().getRequestDispatcher(path).forward(request, response);
+		// Forward http request/response to jsp page.
+		getServletContext().getRequestDispatcher("/new-instructor.jsp").forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

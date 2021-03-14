@@ -19,14 +19,14 @@ import model.Courses;
  * Servlet implementation class NavigationServlet
  */
 //Mirror NavigationServlet.java from 'ShoppingList Online with JPA Servlets JSP 2020.pdf'
-@WebServlet("/NavigationServlet")
-public class NavigationServlet extends HttpServlet {
+@WebServlet("/NavigationCoursesServlet")
+public class NavigationCoursesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NavigationServlet() {
+    public NavigationCoursesServlet() {
         super();
     }
 
