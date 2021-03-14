@@ -22,7 +22,7 @@ public class CoursesHelper {
 	 * Default constructor.
 	*/
 	public CoursesHelper() {
-	// TODO Auto-generated constructor stub
+
 	}
 		
 	/**
