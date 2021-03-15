@@ -12,42 +12,66 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<title>Edit Course:</title>
 	</head>
 	
-	<body>
+	<body style="margin: 50px">
+		<div class="jumbotron">
+			<h1>Graduation List</h1>
+		</div>
 		<h1>Edit Course:</h1>
 		<form action = "EditCourseServlet" method="post">
 		
 			<input type ="hidden" name = "id" value="${courseToEdit.id}">
 			<input type ="hidden" name = "instructorid" value="${courseToEdit.instructor.id}">
-		
-			<p>
-				Course Name:<br />
-				<input type ="text" name = "courseName" value="${courseToEdit.courseName}"><br />
-			</p>
 			
-			<p>
-				Start Date:<br />
-				<input type="text" name="month" placeholder="mm" size="4" value="${courseToEdit.startDate.getMonthValue()}"> 
-				<input type="text" name="day" placeholder="dd" size="4" value="${courseToEdit.startDate.getDayOfMonth()}">, 
-				<input type="text" name="year" placeholder="yyyy" size="4" value="${courseToEdit.startDate.getYear()}">
-			</p>
+			<label for="courseName">Course Name:</label>
+			<div class="form-group col-sm-12">
+				<input type ="text" name = "courseName" class="form-control col-sm-11"value="${courseToEdit.courseName}">
+			</div>
+	
+			<label>Start Date:</label>
+			<div class="row col-sm-8 col-md-7 col-lg-5">
+				<div class="col-3">
+					<input type="text" name="month" placeholder="mm" size="4" class="form-control" value="${courseToEdit.startDate.getMonthValue()}"> 
+				</div>
+				<div class="col-3">
+					<input type="text" name="day" placeholder="dd" size="4" class="form-control" value="${courseToEdit.startDate.getDayOfMonth()}">
+				</div>
+				<div class="col-4">
+					<input type="text" name="year" placeholder="yyyy" size="4" class="form-control" value="${courseToEdit.startDate.getYear()}">
+				</div>
+			</div>
 			
-			<p>
-				Credits:<br />
-				<input type="text" name="credits" value="${courseToEdit.credits}"><br />
-			</p>
-			
-			<p>
-				Instructor:<br /><br />
-				First Name:<input type="text" name="firstName" value="${courseToEdit.instructor.firstName}">
-				Last Name:<input type="text" name="lastName" value="${courseToEdit.instructor.lastName}"><br />
-			</p>
-			<input type = "submit" value="Submit:">
+			<label for="credits">Credits:</label>
+			<div class="row col-sm-11 col-md-7 col-lg-5">
+				<div class="col-3">
+					<input type="text" name="credits" size="4" class="form-control" value="${courseToEdit.credits}">
+				</div>
+			</div>
+
+			<label>Instructor:</label>
+			<div class="row col-sm-12">
+				<div class="col-sm-5">
+					<label for="firstName">First Name:</label>
+					<input type="text" name="firstName" class="form-control" value="${courseToEdit.instructor.firstName}">
+				</div>
+				<div class="col-sm-5">
+					<label for="firstName">Last Name:</label>
+					<input type="text" name="lastName" class="form-control" value="${courseToEdit.instructor.lastName}">
+				</div>
+			</div>
+			<br />
+			<input type = "submit" value="Submit:" class="btn btn-primary">
 		</form>
 		<br />
-		<button onclick="window.location.href='ViewAllCoursesServlet';">Cancel:</button><br /><br /><br />
+		<button onclick="window.location.href='ViewAllCoursesServlet';" class="btn btn-primary">Cancel:</button><br />
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</body>
 </html>
